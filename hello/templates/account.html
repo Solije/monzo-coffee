@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<script>https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="ui info message">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+<div class="ui segment">
+  <div id="ld" class="ui dimmer">
+    <div class="ui massive text loader">Tagging Transactions</div>
+  </div>
+
+{% comment %} Pending OAuth implementation
+  {% if webhook_active %}
+  <div class="alert alert-info text-center" role="alert">
+    Webhook is active. <a href="{% url 'deactivate-webhook' account_id=account_id %}">Deactivate webhook</a>
+  </div>
+  {% else %}
+  <div class="alert alert-warning text-center" role="alert">
+    Webhook is not active. <a href="{% url 'activate-webhook' account_id=account_id %}">Activate webhook</a>
+  </div>
+  {% endif %}
+{% endcomment %}
+
+      <select id="account-id" class="form-control">
+      {% for account in accounts %}
+      <option value="{{ account.id }}">
+      {{ account.type }}{% if account.closed %} (closed){% endif %}
+      </option>
+      {% endfor %}
+      </select>
+
+<script>
+$(document).ready(function() {
+    $('#account-id').val('{{ account_id }}');
+
+    $('#account-id').change(function(){
+        var accountId = document.getElementById("account-id").value;
+        window.location = '/account/' + accountId;
+    });
+});
+</script>
+
+<h3>Tag Database</h3>
+
+<button class="ui basic button">
+  <i class="icon plus"></i>
+  Add Tag
+</button>
+<br>
+<a href="{% url 'tag-new' %}"><span class="glyphicon glyphicon-plus"></span></a>
+<br>
+
+<div class="ui huge tag labels">
+{% for tag, count in tag_counts.items %}
+  <a class="item">
+	  <div class="ui label">{{ tag }} <div class="detail">{{ count }}</div></div>
+  </a>
+{% endfor %}
+
+<h2>Suggested Tags</h2>
+<select name="suggestions" multiple="" class="ui fluid dropdown">
+{% for suggestion in suggestions %}
+<option value="{{ suggestion }}">{{ suggestion }}</option>
+{% endfor %}
+</select>
+
+<button class="ui primary button">
+  Apply Tags
+</button>
+
+<script>
+$('.tag').on('click', function() {
+  $('#ld').toggleClass('active');
+});
+</script>
+
+<div class="ui relaxed divided list">
+  {% for tag in custom_tags %}
+  <div class="item">
+    <i class="large tag middle aligned icon"></i>
+    <div class="content">
+      <a class="header">{{ tag.label }}</a>
+	    <div class="description">
+    		{{ tag.expression }}
+	    </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+
+<h3> Preset Tags</h3>
+{% for option, value in strftime_codes.items %}
+<a href="{% url 'tag-by-time' time_period=option account_id=account_id %}">{{ option }}</a> 
+{% endfor %}
+
+</div>
+{% endblock %}
