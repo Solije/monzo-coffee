@@ -93,9 +93,10 @@ def account(request, account_id):
 
     transactions = client.get_transactions(account_id)['transactions']
 
-    notes = ' '.join([value for txn in transactions 
-                        for (key, value) in txn.items() if key == 'notes']
-                    )
+    #notes = ' '.join([value for txn in transactions 
+    #                    for (key, value) in txn.items() if key == 'notes']
+    #                )
+    notes = ['#something', '#somethingelse']
     tags = re.findall(r"(#\w+)", notes)
 
     suggestions = ['#suggestion{}'.format(i + 1) for i in range(20)]
