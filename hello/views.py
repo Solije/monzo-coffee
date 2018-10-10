@@ -99,6 +99,7 @@ def account(request, account_id):
     tags = re.findall(r"(#\w+)", notes)
 
     #suggestions = ['#suggestion{}'.format(i + 1) for i in range(20)]
+    txn_count = len(transactions)
 
     context = {
         'app_name': app_name,
@@ -109,7 +110,8 @@ def account(request, account_id):
         'custom_tags': custom_tags,
         'tag_counts': Counter(tags),
 #        'suggestions': suggestions
-        'suggestions': ['dfs','sdfd']
+        'suggestions': ['dfs','sdfd'],
+        'txn_count' : len(transactions)
     }
     return render(request, 'account.html', context)
 
