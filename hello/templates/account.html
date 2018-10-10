@@ -63,6 +63,7 @@ $(document).ready(function() {
 <br>
 <a href="{% url 'tag-new' %}"><span class="glyphicon glyphicon-plus"></span></a>
 <br>
+{% endcomment %}
 
 <div class="ui huge tag labels">
 {% for tag, count in tag_counts.items %}
@@ -71,7 +72,6 @@ $(document).ready(function() {
   </a>
 {% endfor %}
 
-{% endcomment %}
 <h2>Suggested Tags</h2>
 <select name="suggestions" multiple="" class="ui fluid dropdown">
 {% for suggestion in suggestions %}
