@@ -2,6 +2,7 @@
 {% load staticfiles %}
 
 {% block content %}
+{% comment %}
 
 {% if messages %}
     {% for message in messages %}
@@ -158,4 +159,5 @@ $('.tag').on('click', function() {
   </div>
 </div>
 
+{% endcomment %}
 {% endblock %}

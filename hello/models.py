@@ -22,11 +22,10 @@ class Settings(models.Model):
     last_used_account = models.CharField(max_length=50)
 
 class History(models.Model):
-    label = models.CharField(max_length=50, unique=True, primary_key=True)
-    expression = models.TextField()
+    tag = models.CharField(max_length=50)
+    txn_ids = models.TextField()
     created = models.DateTimeField('date created', auto_now_add=True)
 
     class Meta:
         ordering = ('-created',)
-
 
