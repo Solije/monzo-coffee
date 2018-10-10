@@ -98,9 +98,7 @@ def account(request, account_id):
                     )
     tags = re.findall(r"(#\w+)", notes)
 
-    suggested_tags = ' '.join([value['metadata']['suggested_tags'] for txn in transactions for (key, value) in txn.items() if key == 'merchant']
-                     )
-    suggestions = set(re.findall(r"(#\w+)", suggested_tags))
+    suggestions = ['#suggestion{}'.format(i) for i in range(20)]
 
     context = {
         'app_name': app_name,
