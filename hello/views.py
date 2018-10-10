@@ -14,7 +14,7 @@ from monzo.monzo import Monzo
 from monzo.errors import BadRequestError, UnauthorizedError
 
 from .forms import TagForm
-from .models import Webhook, Tag, Settings
+from .models import Webhook, Tag, Settings, History
 
 
 
@@ -109,8 +109,7 @@ def account(request, account_id):
         'strftime_codes': strftime_code,
         'custom_tags': custom_tags,
         'tag_counts': Counter(tags),
-        'suggestions': suggestions
-        'suggestions': ['dfs','sdfd'],
+        'suggestions': suggestions,
         'txn_count' : len(transactions)
     }
     return render(request, 'account.html', context)
@@ -167,7 +166,7 @@ def tag_apply(request, pk, account_id):
     txns = client.get_transactions(account_id)['transactions']
     txns = parse_datetimes(txns)
     
-    txns_updated = 0
+    txn_ids = []
     for txn in txns:
         try:
             if eval(tag.expression):
@@ -176,7 +175,7 @@ def tag_apply(request, pk, account_id):
                                     txn['id'],
                                     txn['notes'] + ' ' + tag.label
                                   ) 
-                    txns_updated += 1
+                    txn_ids.append(txn['id'])
         except (TypeError, KeyError):
             pass
         except Exception as e:
@@ -184,7 +183,12 @@ def tag_apply(request, pk, account_id):
             messages.warning(request, 'There is a problem with your Python expression: ' + str(e))
             return redirect('account', account_id)
 
+    txns_updated = len(txn_ids)
     if txns_updated:
+        History.objects.create(
+            tag=tag.label,
+            txn_ids='|'.join(txn_ids)
+        )
         messages.info(request, '{} transactions tagged. Android users may need to delete App Cache and Data before changes are visible in the app.'.format(txns_updated))
     else:
         messages.warning(request, 'No transactions match the given criteria')
@@ -252,7 +256,7 @@ def tag_by_time(request, account_id, time_period):
                           ) 
             txns_updated += 1
 
-    messages.info(request, 'All {} transactions were tagged. Android users may need to delete App Cache and App Data before changes are visible in the app.'.format(txns_updated))
+    messages.info(request, 'All {} transactions were tagged. You may need to delete App Cache and App Data before changes are visible in the Monzo app.'.format(txns_updated))
 
     return redirect('account', account_id)
 
