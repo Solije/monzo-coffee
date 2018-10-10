@@ -1,12 +1,15 @@
 -   model: hello.tag
     pk: '#coffee'
-    fields: {expression: 'txn[''merchant''][''name''] in (''Starbucks'', ''Costa Coffee'')', created: ! '2018-10-05 23:43:07.299026+00:00'}
+    fields: {expression: 'txn[''merchant''][''name''] in (''Starbucks'', ''Costa Coffee'')', created: ! '2018-10-01 23:43:07.299026+00:00'}
 -   model: hello.tag
     pk: '#usa'
-    fields: {expression: 'txn[''merchant''][''address''][''country''] == ''USA''', created: ! '2018-10-06 01:47:58.781953+00:00'}
+    fields: {expression: 'txn[''merchant''][''address''][''country''] == ''USA''', created: ! '2018-10-03 01:47:58.781953+00:00'}
 -   model: hello.tag
     pk: '#weekend'
-    fields: {expression: 'txn[''created''].weekday() > 4', created: ! '2018-10-06 01:47:58.781953+00:00'}
+    fields: {expression: 'txn[''created''].weekday() > 4', created: ! '2018-10-05 01:47:58.781953+00:00'}
 -   model: hello.tag
     pk: '#fail'
-    fields: {expression: 'txn[''decline_reason'']', created: ! '2018-10-06 01:47:58.781953+00:00'}
+    fields: {expression: 'txn[''decline_reason'']', created: ! '2018-10-04 01:47:58.781953+00:00'}
+-   model: hello.tag
+    pk: '#dinner'
+    fields: {expression: 'txn[''category''] == ''eating_out'' and 17 < txn[''created''].hour < 22', created: ! '2018-10-02 01:47:58.781953+00:00'}
