@@ -95,6 +95,7 @@ def account(request, account_id):
 
     notes = ' '.join([value for txn in transactions 
                         for (key, value) in txn.items() if key == 'notes']
+                    )
     tags = re.findall(r"(#\w+)", notes)
 
     suggestions = ['#suggestion{}'.format(i + 1) for i in range(20)]
