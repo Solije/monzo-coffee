@@ -108,7 +108,7 @@ def account(request, account_id):
         'webhook_active': webhook_active,
         'strftime_codes': strftime_code,
         'custom_tags': custom_tags,
-        'tag_counts': Counter(tags),
+        'tag_counts': dict(Counter(tags)),
         'suggestions': suggestions,
         'txn_count' : len(transactions)
     }
