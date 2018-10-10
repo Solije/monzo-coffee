@@ -9,6 +9,22 @@
     {% endfor %}
 {% endif %}
 
+<div class="ui form">
+<div class="field">
+<label>Account</label>
+<div class="ui selection dropdown">
+<input type="hidden" name="account">
+<i class="dropdown icon"></i>
+  <div class="default text">Account</div>
+    <div class="menu">
+      {% for account in accounts %}
+      <div class="item" data-value="{{ account.id }}">{{ account.type }}{% if account.closed %} (closed){% endif %}</div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+</div>
+
 <div class="ui segment">
   <div id="ld" class="ui dimmer">
     <div class="ui massive text loader">Tagging Transactions</div>
