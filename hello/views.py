@@ -93,13 +93,12 @@ def account(request, account_id):
 
     transactions = client.get_transactions(account_id)['transactions']
 
-    #notes = ' '.join([value for txn in transactions 
-    #                    for (key, value) in txn.items() if key == 'notes']
-    #                )
-    notes = '#something #somethingelse'
+    notes = ' '.join([value for txn in transactions 
+                        for (key, value) in txn.items() if key == 'notes']
+                    )
     tags = re.findall(r"(#\w+)", notes)
 
-    suggestions = ['#suggestion{}'.format(i + 1) for i in range(20)]
+    #suggestions = ['#suggestion{}'.format(i + 1) for i in range(20)]
 
     context = {
         'app_name': app_name,
@@ -109,7 +108,8 @@ def account(request, account_id):
         'strftime_codes': strftime_code,
         'custom_tags': custom_tags,
         'tag_counts': Counter(tags),
-        'suggestions': suggestions
+#        'suggestions': suggestions
+        'suggestions': ['dfs','sdfd']
     }
     return render(request, 'account.html', context)
 
