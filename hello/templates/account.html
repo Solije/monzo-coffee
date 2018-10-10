@@ -42,14 +42,6 @@
   {% endif %}
 {% endcomment %}
 
-      <select id="account-id" class="form-control">
-      {% for account in accounts %}
-      <option value="{{ account.id }}">
-      {{ account.type }}{% if account.closed %} (closed){% endif %}
-      </option>
-      {% endfor %}
-      </select>
-
 <script>
 $(document).ready(function() {
     $('#account-id').val('{{ account_id }}');
