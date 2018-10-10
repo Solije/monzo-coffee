@@ -116,4 +116,54 @@ $('.tag').on('click', function() {
 {% endfor %}
 
 </div>
+
+<div class="ui statistic">
+  <div class="value">
+    5,550
+  </div>
+  <div class="label">
+    Transactions tagged
+  </div>
+</div>
+
+<div class="ui teal buttons">
+  <div class="ui button">Tag Menu</div>
+  <div class="ui floating dropdown icon button">
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      <div class="item"><i class="edit icon"></i> Rename Tag</div>
+      <div class="item"><i class="delete icon"></i> Delete Tag</div>
+    </div>
+  </div>
+</div>
+
+<div id="confirm-delete-tag" class="ui tiny modal">
+  <div class="header">Delete tag?</div>
+  <div class="content">
+    <p>This will remove this tag from all transactions.</p>
+  </div>
+  <div class="actions">
+    <div class="ui approve button">OK</div>
+    <div class="ui cancel button">Cancel</div>
+  </div>
+</div>
+
+<script>
+//$('#confirm-delete-tag').modal('show');
+</script>
+
+<div class="ui feed">
+  <div class="event">
+    <div class="label">
+      <i class="undo alternate icon"></i>
+    </div>
+    <div class="content">
+      <div class="summary">
+	Tagged <b>42</b> transactions with <b>#tag</b>
+        <div class="date">Time ago</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
