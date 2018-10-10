@@ -71,6 +71,7 @@ $(document).ready(function() {
   </a>
 {% endfor %}
 
+{% endcomment %}
 <h2>Suggested Tags</h2>
 <select name="suggestions" multiple="" class="ui fluid dropdown">
 {% for suggestion in suggestions %}
@@ -78,7 +79,6 @@ $(document).ready(function() {
 {% endfor %}
 </select>
 
-{% endcomment %}
 <button class="ui primary button">
   Apply Tags
 </button>
