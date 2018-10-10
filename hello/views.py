@@ -187,7 +187,8 @@ def tag_apply(request, pk, account_id):
     if txns_updated:
         History.objects.create(
             tag=tag.label,
-            txn_ids='|'.join(txn_ids)
+            txn_ids='|'.join(txn_ids),
+            txns_affected=len(txn_ids)
         )
         messages.info(request, '{} transactions tagged. Android users may need to delete App Cache and Data before changes are visible in the app.'.format(txns_updated))
     else:

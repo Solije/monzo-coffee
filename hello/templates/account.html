@@ -145,19 +145,22 @@ $('.tag').on('click', function() {
 <script>
 //$('#confirm-delete-tag').modal('show');
 </script>
-
+{% comment %}
 <div class="ui feed">
+  {% for event in history %}
   <div class="event">
     <div class="label">
       <i class="undo alternate icon"></i>
     </div>
     <div class="content">
       <div class="summary">
-	Tagged <b>42</b> transactions with <b>#tag</b>
+	      Tagged <b>{{ event.txns_affected }}</b> transactions with <b>{{ event.tag }}</b>
         <div class="date">Time ago</div>
       </div>
     </div>
   </div>
+  {% endfor %}
 </div>
+{% endcomment %}
 
 {% endblock %}
