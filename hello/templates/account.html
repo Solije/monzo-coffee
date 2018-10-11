@@ -17,10 +17,8 @@
 	}
 	</style>
 
-	<div id="online-canvas-holder" style="width:40%">
-		<canvas id="online-chart-area"></canvas>
-	</div>
 
+<canvas id="onlineChart"></canvas>
 <script>
 var config = {
 	type: 'doughnut',
@@ -58,14 +56,12 @@ var config = {
 };
 
 window.onload = function() {
-	var ctx = document.getElementById('online-chart-area').getContext('2d');
+	var ctx = document.getElementById('onlineChart').getContext('2d');
 	window.onlineChart = new Chart(ctx, config);
 };
 </script>
 
-	<div id="uk-canvas-holder" style="width:40%">
-		<canvas id="uk-chart-area"></canvas>
-	</div>
+<canvas id="ukChart"></canvas>
 <script>
 var config = {
 	type: 'doughnut',
@@ -103,13 +99,10 @@ var config = {
 };
 
 window.onload = function() {
-	var ctx = document.getElementById('uk-chart-area').getContext('2d');
+	var ctx = document.getElementById('ukChart').getContext('2d');
 	window.ukChart = new Chart(ctx, config);
 };
 </script>
-
-
-
 
 <div class="ui form">
 <div class="field">
