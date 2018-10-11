@@ -294,7 +294,7 @@ def tag_test(request, account_id):
     client = Monzo(os.environ.get('MONZO_ACCESS_TOKEN'))
     txns = client.get_transactions(account_id)['transactions']
     txns = parse_datetimes(txns)
-    txn = max(txn.items(), key=lambda x: x['created'])
+    txn = max(txns.items(), key=lambda x: x['created'])
 
     txn_ids = []
     if tag.label not in txn['notes']:
