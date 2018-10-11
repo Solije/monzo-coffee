@@ -22,6 +22,7 @@ class Settings(models.Model):
     last_used_account = models.CharField(max_length=50)
 
 class History(models.Model):
+    action = models.CharField(max_length=20)
     tag = models.CharField(max_length=50)
     account_id = models.CharField(max_length=50)
     txn_ids = models.TextField()

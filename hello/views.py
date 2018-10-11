@@ -302,6 +302,8 @@ def tag_test(request, account_id):
                                     txn['notes'] + ' #test'
                                   ) 
         History.objects.create(
+            account_id=account_id,
+            action='tag_apply',
             tag='#test',
             txn_ids=txn['id'],
             txns_affected=1
