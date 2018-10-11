@@ -9,6 +9,59 @@
     {% endfor %}
 {% endif %}
 
+	<style>
+	canvas {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
+
+	<div id="canvas-holder" style="width:40%">
+		<canvas id="chart-area"></canvas>
+	</div>
+
+	<script>
+		var config = {
+			type: 'doughnut',
+			data: {
+				datasets: [{
+					data: [
+						{{ online_data.online }},
+						{{ online_data.in_store }},
+					],
+					backgroundColor: [
+						window.chartColors.orange,
+						window.chartColors.blue,
+					],
+					label: 'Transactions'
+				}],
+				labels: [
+					'Orange',
+					'Blue'
+				]
+			},
+			options: {
+				responsive: true,
+				legend: {
+					position: 'top',
+				},
+				title: {
+					display: true,
+					text: 'Online Transactions'
+				},
+				animation: {
+					animateScale: true,
+					animateRotate: true
+				}
+			}
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('chart-area').getContext('2d');
+			window.myDoughnut = new Chart(ctx, config);
+		};
+</script>
 <div class="ui form">
 <div class="field">
 <label>Account</label>
@@ -183,8 +236,8 @@ $(document).ready(function() {
   <div class="ui icon header">
     <i class="dont icon"></i>
     You haven't applied any changes yet.
-  </div>
-  <a href="//google.com"><div class="ui primary button disabled">Do a #test</div></a>
+  </div><br>
+  <a href="//google.com"><div class="ui primary button">Do a #test</div></a>
 </div>
 {% endif %}
 </div>

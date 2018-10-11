@@ -102,6 +102,9 @@ def account(request, account_id):
     suggestions = ['#suggestion{}'.format(i + 1) for i in range(20)]
     txn_count = len(transactions)
 
+    online = len(['1' for txn in transactions if txn['online']))
+    in_store = len(['1' for txn in transactions if not txn['online'])
+
     context = {
         'app_name': app_name,
         'accounts': accounts,
@@ -113,7 +116,8 @@ def account(request, account_id):
         'suggestions': suggestions,
         'txn_count' : len(transactions),
         'tags_used_count' : sum(tag_counts.values()),
-        'history' : History.objects.all()
+        'history' : History.objects.all(),
+        'online_data' : { 'online': online, 'in_store': in_store }
     }
     return render(request, 'account.html', context)
 
