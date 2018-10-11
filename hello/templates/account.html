@@ -101,9 +101,7 @@ $('.dropdown')
 
 <div class="ui huge tag labels">
 {% for tag, count in tag_counts.items %}
-  <a class="item">
-	  <div class="ui label">{{ tag }} <div class="detail">{{ count }}</div></div>
-  </a>
+<a class="ui label">{{ tag }} <div class="detail">{{ count }}</div></a>
 {% endfor %}
 
 <h2>Suggested Tags</h2>
