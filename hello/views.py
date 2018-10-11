@@ -103,11 +103,25 @@ def account(request, account_id):
     txn_count = len(transactions)
 
     # Online vs. in-store
-    online = len(['1' for txn in transactions if txn.get('merchant', {}).get('online')])
+    online = 0
+    for txn in transactions:
+        try:
+            if txn['merchant']['online']:
+                online += 1
+        except (KeyError, AttributeError):
+            continue
+
     in_store = txn_count - online
 
     # UK vs. abroad
-    uk = len(['1' for txn in transactions if txn.get('merchant', {}).get('address', {}).get('country') == 'GBR'])
+    uk = 0
+    for txn in transactions:
+        try:
+            if txn['merchant']['address']['country'] == 'GBR':
+                uk += 1
+        except (KeyError, AttributeError):
+            continue
+
     abroad = txn_count - uk
 
     context = {
@@ -190,7 +204,7 @@ def tag_apply(request, pk, account_id):
                                   ) 
                     txn_ids.append(txn['id'])
         except (TypeError, KeyError):
-            pass
+            continue
         except Exception as e:
             raise e
             messages.warning(request, 'There is a problem with your Python expression: ' + str(e))
