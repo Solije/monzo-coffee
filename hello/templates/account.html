@@ -164,6 +164,7 @@ $(document).ready(function() {
 </script>
 
 <div class="ui feed">
+{% if history %}
   {% for event in history %}
   <div class="event">
     <div class="label">
@@ -177,6 +178,15 @@ $(document).ready(function() {
     </div>
   </div>
   {% endfor %}
+{% else %}
+<div class="ui placeholder segment">
+  <div class="ui icon header">
+    <i class="dont icon"></i>
+    You haven't applied any changes yet.
+  </div>
+  <div class="ui primary button disabled">Do a #test</div>
+</div>
+{% endif %}
 </div>
 
 {% endblock %}
