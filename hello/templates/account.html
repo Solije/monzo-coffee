@@ -17,51 +17,100 @@
 	}
 	</style>
 
-	<div id="canvas-holder" style="width:40%">
-		<canvas id="chart-area"></canvas>
+	<div id="online-canvas-holder" style="width:40%">
+		<canvas id="online-chart-area"></canvas>
 	</div>
 
-	<script>
-		var config = {
-			type: 'doughnut',
-			data: {
-				datasets: [{
-					data: [
-						{{ online_data.online }},
-						{{ online_data.in_store }},
-					],
-					backgroundColor: [
-						'rgb(255, 159, 64)',
-						'rgb(54, 162, 235)'
-					],
-					label: 'Transactions'
-				}],
-				labels: [
-					'Online',
-					'In-store'
-				]
-			},
-			options: {
-				responsive: true,
-				legend: {
-					position: 'top',
-				},
-				title: {
-					display: true,
-					text: 'Online Transactions'
-				},
-				animation: {
-					animateScale: true,
-					animateRotate: true
-				}
-			}
-		};
+<script>
+var config = {
+	type: 'doughnut',
+	data: {
+		datasets: [{
+			data: [
+				{{ online_data.online }},
+				{{ online_data.in_store }},
+			],
+			backgroundColor: [
+				'rgb(255, 159, 64)',
+				'rgb(54, 162, 235)'
+			],
+			label: 'Transactions'
+		}],
+		labels: [
+			'Online',
+			'In-store'
+		]
+	},
+	options: {
+		responsive: true,
+		legend: {
+			position: 'top',
+		},
+		title: {
+			display: true,
+			text: 'Online Transactions'
+		},
+		animation: {
+			animateScale: true,
+			animateRotate: true
+		}
+	}
+};
 
-		window.onload = function() {
-			var ctx = document.getElementById('chart-area').getContext('2d');
-			window.myDoughnut = new Chart(ctx, config);
-		};
+window.onload = function() {
+	var ctx = document.getElementById('online-chart-area').getContext('2d');
+	window.myDoughnut = new Chart(ctx, config);
+};
 </script>
+
+	<div id="uk-canvas-holder" style="width:40%">
+		<canvas id="uk-chart-area"></canvas>
+	</div>
+<script>
+var config = {
+	type: 'doughnut',
+	data: {
+		datasets: [{
+			data: [
+				{{ uk_data.uk }},
+				{{ uk_data.abroad }},
+			],
+			backgroundColor: [
+				'rgb(255, 159, 64)',
+				'rgb(54, 162, 235)'
+			],
+			label: 'Transactions'
+		}],
+		labels: [
+			'UK',
+			'Abroad'
+		]
+	},
+	options: {
+		responsive: true,
+		legend: {
+			position: 'top',
+		},
+		title: {
+			display: true,
+			text: 'Foreign Transactions'
+		},
+		animation: {
+			animateScale: true,
+			animateRotate: true
+		}
+	}
+};
+
+window.onload = function() {
+	var ctx = document.getElementById('uk-chart-area').getContext('2d');
+	window.myDoughnut = new Chart(ctx, config);
+};
+</script>
+
+
+
+
 <div class="ui form">
 <div class="field">
 <label>Account</label>

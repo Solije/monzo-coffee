@@ -102,8 +102,13 @@ def account(request, account_id):
     suggestions = ['#suggestion{}'.format(i + 1) for i in range(20)]
     txn_count = len(transactions)
 
+    # Online vs. in-store
     online = len(['1' for txn in transactions if txn.get('merchant', {}).get('online')])
     in_store = txn_count - online
+
+    # UK vs. abroad
+    uk = len(['1' for txn in transactions if txn.get('merchant', {}).get('address', {}).get('country') == 'GBR'])
+    abroad = txn_count - uk
 
     context = {
         'app_name': app_name,
@@ -118,6 +123,7 @@ def account(request, account_id):
         'tags_used_count' : sum(tag_counts.values()),
         'history' : History.objects.all(),
         'online_data' : { 'online': online, 'in_store': in_store }
+        'uk_data' : { 'uk': uk, 'abroad': abroad }
     }
     return render(request, 'account.html', context)
 
