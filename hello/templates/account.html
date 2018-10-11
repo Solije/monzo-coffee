@@ -2,7 +2,6 @@
 {% load staticfiles %}
 
 {% block content %}
-{% comment %}
 
 {% if messages %}
     {% for message in messages %}
@@ -42,7 +41,6 @@
   </div>
   {% endif %}
 {% endcomment %}
-{% comment %} 
 <script>
 $(document).ready(function() {
     $('#account-id').val('{{ account_id }}');
@@ -64,11 +62,10 @@ $(document).ready(function() {
 <a href="{% url 'tag-new' %}"><span class="glyphicon glyphicon-plus"></span></a>
 <br>
 
-{% endcomment %}
 
 <div class="ui statistic">
   <div class="value">
-    {{ transaction_count }}
+    {{ txn_count }}
   </div>
   <div class="label">
     Transactions tagged
