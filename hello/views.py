@@ -136,7 +136,7 @@ def account(request, account_id):
         'txn_count' : len(transactions),
         'tags_used_count' : sum(tag_counts.values()),
         'history' : History.objects.all(),
-        'online_data' : { 'online': online, 'in_store': in_store }
+        'online_data' : { 'online': online, 'in_store': in_store },
         'uk_data' : { 'uk': uk, 'abroad': abroad }
     }
     return render(request, 'account.html', context)
