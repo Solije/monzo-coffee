@@ -54,11 +54,6 @@ var config = {
 		}
 	}
 };
-
-window.onload = function() {
-	var ctx = document.getElementById('onlineChart').getContext('2d');
-	window.onlineChart = new Chart(ctx, config);
-};
 </script>
 
 <canvas id="ukChart" width="40%"></canvas>
@@ -99,6 +94,8 @@ var config2 = {
 };
 
 window.onload = function() {
+	var ctx = document.getElementById('onlineChart').getContext('2d');
+	window.onlineChart = new Chart(ctx, config);
 	var ctx2 = document.getElementById('ukChart').getContext('2d');
 	window.ukChart = new Chart(ctx2, config2);
 };
