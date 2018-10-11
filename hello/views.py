@@ -102,8 +102,8 @@ def account(request, account_id):
     suggestions = ['#suggestion{}'.format(i + 1) for i in range(20)]
     txn_count = len(transactions)
 
-    online = len(['1' for txn in transactions if txn['online'])
-    in_store = len(['1' for txn in transactions if not txn['online'])
+    online = len(['1' for txn in transactions if txn['online']])
+    in_store = len(['1' for txn in transactions if not txn['online']])
 
     context = {
         'app_name': app_name,
