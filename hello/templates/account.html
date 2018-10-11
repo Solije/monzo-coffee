@@ -42,14 +42,6 @@
   {% endif %}
 {% endcomment %}
 <script>
-$(document).ready(function() {
-    $('#account-id').val('{{ account_id }}');
-
-    $('#account-id').change(function(){
-        var accountId = document.getElementById("account-id").value;
-        window.location = '/account/' + accountId;
-    });
-});
 $('.dropdown')
   .dropdown({
 	  action: function(text, value) {
@@ -57,6 +49,9 @@ $('.dropdown')
 	  }
   })
 ;
+$(document).ready(function() {
+    $('#account-id').val('{{ account_id }}');
+});
 </script>
 
 <h3>Tag Database</h3>
@@ -97,8 +92,6 @@ $('.dropdown')
   </div>
 </div>
 
-
-
 <div class="ui huge tag labels">
 {% for tag, count in tag_counts.items %}
 <a class="ui label">{{ tag }} <div class="detail">{{ count }}</div></a>
@@ -128,7 +121,7 @@ $('.tag').on('click', function() {
     <div class="content">
       <a class="header">{{ tag.label }}</a>
 	    <div class="description">
-    		{{ tag.expression }}
+		    <code>{{ tag.expression }}</code>
 	    </div>
     </div>
   </div>
