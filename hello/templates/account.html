@@ -18,7 +18,7 @@
 	</style>
 
 
-<canvas id="onlineChart"></canvas>
+<canvas id="onlineChart" width="40%"></canvas>
 <script>
 var config = {
 	type: 'doughnut',
@@ -57,11 +57,11 @@ var config = {
 
 window.onload = function() {
 	var ctx = document.getElementById('onlineChart').getContext('2d');
-	window.onlineChart = new Chart(ctx, config);
+	window.onlineChart = new Chart(ctx, config2);
 };
 </script>
 
-<canvas id="ukChart"></canvas>
+<canvas id="ukChart" width="40%"></canvas>
 <script>
 var config = {
 	type: 'doughnut',
@@ -100,7 +100,7 @@ var config = {
 
 window.onload = function() {
 	var ctx = document.getElementById('ukChart').getContext('2d');
-	window.ukChart = new Chart(ctx, config);
+	window.ukChart = new Chart(ctx2, config2);
 };
 </script>
 
@@ -279,7 +279,7 @@ $(document).ready(function() {
     <i class="dont icon"></i>
     You haven't applied any changes yet.
   </div><br>
-  <a href="//google.com"><div class="ui primary button">Do a #test</div></a>
+  <a href="{% url 'tag-tes' %}"><div class="ui primary button">Do a #test</div></a>
 </div>
 {% endif %}
 </div>
