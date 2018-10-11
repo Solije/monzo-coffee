@@ -193,7 +193,7 @@ def tag_apply(request, pk, account_id):
             txn_ids='|'.join(txn_ids),
             txns_affected=len(txn_ids)
         )
-        messages.info(request, '{} transactions tagged. Android users may need to delete App Cache and Data before changes are visible in the app.'.format(txns_updated))
+        messages.info(request, '{} transactions tagged. You may need to delete App Cache and Data before updates are visible in the Monzo app.'.format(txns_updated))
     else:
         messages.warning(request, 'No transactions match the given criteria')
     return redirect('account', account_id)
