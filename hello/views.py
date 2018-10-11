@@ -296,16 +296,15 @@ def tag_test(request, account_id):
     txns = parse_datetimes(txns)
     txn = max(txns, key=lambda x: x['created'])
 
-    txn_ids = []
-    if tag.label not in txn['notes']:
+    if '#test' not in txn['notes']:
         updated_txn = client.update_transaction_notes(
                                     txn['id'],
-                                    txn['notes'] + ' ' + tag.label
+                                    txn['notes'] + ' #test'
                                   ) 
         History.objects.create(
-            tag=tag.label,
-            txn_ids='|'.join(txn_ids),
-            txns_affected=len(txn_ids)
+            tag='#test',
+            txn_ids=txn['id'],
+            txns_affected=1
         )
         messages.info(request, 'Your latest transaction was tagged with #test. If it is older than a week, may need to delete App Cache and Data before the update is visible in the Monzo app.'.format(txns_updated))
 
