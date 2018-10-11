@@ -272,37 +272,22 @@ def tag_by_time(request, account_id, time_period):
 def tag_test(request, account_id):
     """Tag most recent transaction with #test"""
     client = Monzo(os.environ.get('MONZO_ACCESS_TOKEN'))
-    txn = client.get_transactions(account_id)['transactions']
-    
-    latest = max(my_dict.items(), key=lambda x: x[1]['last_event'])[0]
+    txns = client.get_transactions(account_id)['transactions']
+    txns = parse_datetimes(txns)
+    txn = max(txn.items(), key=lambda x: x['created'])
 
     txn_ids = []
-    for txn in txns:
-        try:
-            if eval(tag.expression):
-                if tag.label not in txn['notes']:
-                    updated_txn = client.update_transaction_notes(
+    if tag.label not in txn['notes']:
+        updated_txn = client.update_transaction_notes(
                                     txn['id'],
                                     txn['notes'] + ' ' + tag.label
                                   ) 
-                    txn_ids.append(txn['id'])
-        except (TypeError, KeyError):
-            pass
-        except Exception as e:
-            raise e
-            messages.warning(request, 'There is a problem with your Python expression: ' + str(e))
-            return redirect('account', account_id)
-
-    txns_updated = len(txn_ids)
-    if txns_updated:
         History.objects.create(
             tag=tag.label,
             txn_ids='|'.join(txn_ids),
             txns_affected=len(txn_ids)
         )
-        messages.info(request, '{} transactions tagged. You may need to delete App Cache and Data before updates are visible in the Monzo app.'.format(txns_updated))
-    else:
-        messages.warning(request, 'No transactions match the given criteria')
-    return redirect('account', account_id)
+        messages.info(request, 'Your latest transaction was tagged with #test. If it is older than a week, may need to delete App Cache and Data before the update is visible in the Monzo app.'.format(txns_updated))
 
+    return redirect('account', account_id)
 

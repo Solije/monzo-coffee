@@ -11,9 +11,12 @@ from password_required.views import login
 urlpatterns = [
     path('', views.index, name='index'),
     
+    path('tag-test', views.tag_test, name='tag-test'),
+
     path('tag/new', views.tag_new, name='tag-new'),
     path('tag/<str:pk>/edit/', views.tag_edit, name='tag-edit'),
     path('tag/<str:pk>/apply/<str:account_id>', views.tag_apply, name='tag-apply'),
+
 
     path('tag-by-time/<str:account_id>/<str:time_period>', views.tag_by_time, name='tag-by-time'),
 
