@@ -108,7 +108,7 @@ def account(request, account_id):
         try:
             if txn['merchant']['online']:
                 online += 1
-        except (KeyError, AttributeError):
+        except (KeyError, AttributeError, TypeError):
             continue
 
     in_store = txn_count - online
