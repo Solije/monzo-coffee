@@ -97,6 +97,7 @@ def account(request, account_id):
                         for (key, value) in txn.items() if key == 'notes']
                     )
     tags = re.findall(r"(#\w+)", notes)
+    tag_counts = dict(Counter(tags))
 
     suggestions = ['#suggestion{}'.format(i + 1) for i in range(20)]
     txn_count = len(transactions)
@@ -108,9 +109,10 @@ def account(request, account_id):
         'webhook_active': webhook_active,
         'strftime_codes': strftime_code,
         'custom_tags': custom_tags,
-        'tag_counts': dict(Counter(tags)),
+        'tag_counts': tag_counts,
         'suggestions': suggestions,
-        'txn_count' : len(transactions)
+        'txn_count' : len(transactions),
+        'tags_used_count' : sum(tag_counts.values())
     }
     return render(request, 'account.html', context)
 
