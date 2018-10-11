@@ -114,7 +114,7 @@ $(document).ready(function() {
     {{ txn_count }}
   </div>
   <div class="label">
-    Transactions tagged
+    Transactions
   </div>
 </div>
 
@@ -136,12 +136,14 @@ $(document).ready(function() {
   </div>
 </div>
 
+<div>
 <a href="{% url 'tag-new' %}">
 <button class="ui basic button">
   <i class="icon plus"></i>
-  Add Tag
+    Add Tag
 </button>
 </a>
+<div>
 
 <div class="ui huge tag labels">
 {% for tag, count in tag_counts.items %}
