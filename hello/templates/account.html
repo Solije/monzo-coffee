@@ -109,15 +109,6 @@ $(document).ready(function() {
 
 <h3>Tag Database</h3>
 
-<button class="ui basic button">
-  <i class="icon plus"></i>
-  Add Tag
-</button>
-<br>
-<a href="{% url 'tag-new' %}"><span class="glyphicon glyphicon-plus"></span></a>
-<br>
-
-
 <div class="ui statistic">
   <div class="value">
     {{ txn_count }}
@@ -144,6 +135,13 @@ $(document).ready(function() {
     Different tags used
   </div>
 </div>
+
+<a href="{% url 'tag-new' %}">
+<button class="ui basic button">
+  <i class="icon plus"></i>
+  Add Tag
+</button>
+</a>
 
 <div class="ui huge tag labels">
 {% for tag, count in tag_counts.items %}
