@@ -22,6 +22,15 @@
 	</div>
 
 <script>
+var chartColors = {
+	red: 'rgb(255, 99, 132)',
+	orange: 'rgb(255, 159, 64)',
+	yellow: 'rgb(255, 205, 86)',
+	green: 'rgb(75, 192, 192)',
+	blue: 'rgb(54, 162, 235)',
+	purple: 'rgb(153, 102, 255)',
+	grey: 'rgb(201, 203, 207)'
+};
 var config = {
 	type: 'doughnut',
 	data: {
@@ -31,8 +40,8 @@ var config = {
 				{{ online_data.in_store }},
 			],
 			backgroundColor: [
-				'rgb(255, 159, 64)',
-				'rgb(54, 162, 235)'
+				chartColours['orange'],
+				chartColours['blue'],
 			],
 			label: 'Transactions'
 		}],
@@ -71,8 +80,8 @@ var config2 = {
 				{{ uk_data.abroad }},
 			],
 			backgroundColor: [
-				'rgb(255, 159, 64)',
-				'rgb(54, 162, 235)'
+				chartColours['yellow'],
+				chartColours['green'],
 			],
 			label: 'Transactions'
 		}],
