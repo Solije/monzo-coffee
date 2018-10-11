@@ -50,6 +50,13 @@ $(document).ready(function() {
         window.location = '/account/' + accountId;
     });
 });
+$('.dropdown')
+  .dropdown({
+	  action: function(text, value) {
+        	window.location = '/account/' + value;
+	  }
+  })
+;
 </script>
 
 <h3>Tag Database</h3>
