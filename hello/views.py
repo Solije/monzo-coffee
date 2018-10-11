@@ -112,7 +112,8 @@ def account(request, account_id):
         'tag_counts': tag_counts,
         'suggestions': suggestions,
         'txn_count' : len(transactions),
-        'tags_used_count' : sum(tag_counts.values())
+        'tags_used_count' : sum(tag_counts.values()),
+        'history' : History.objects.all()
     }
     return render(request, 'account.html', context)
 
