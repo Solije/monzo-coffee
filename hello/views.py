@@ -119,7 +119,7 @@ def account(request, account_id):
         try:
             if txn['merchant']['address']['country'] == 'GBR':
                 uk += 1
-        except (KeyError, AttributeError):
+        except (KeyError, AttributeError, TypeError):
             continue
 
     abroad = txn_count - uk
