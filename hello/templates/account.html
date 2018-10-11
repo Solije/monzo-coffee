@@ -65,6 +65,36 @@ $(document).ready(function() {
 <br>
 
 {% endcomment %}
+
+<div class="ui statistic">
+  <div class="value">
+    {{ transaction_count }}
+  </div>
+  <div class="label">
+    Transactions tagged
+  </div>
+</div>
+
+<div class="ui statistic">
+  <div class="value">
+    {{ tags_used_count }}
+  </div>
+  <div class="label">
+    Total tags
+  </div>
+</div>
+
+<div class="ui statistic">
+  <div class="value">
+    {{ tag_counts.items|length }}
+  </div>
+  <div class="label">
+    Different tags used
+  </div>
+</div>
+
+
+
 <div class="ui huge tag labels">
 {% for tag, count in tag_counts.items %}
   <a class="item">
@@ -109,33 +139,6 @@ $('.tag').on('click', function() {
 <a href="{% url 'tag-by-time' time_period=option account_id=account_id %}">{{ option }}</a> 
 {% endfor %}
 
-</div>
-
-<div class="ui statistic">
-  <div class="value">
-    {{ transaction_count }}
-  </div>
-  <div class="label">
-    Transactions tagged
-  </div>
-</div>
-
-<div class="ui statistic">
-  <div class="value">
-    {{ tags_used_count }}
-  </div>
-  <div class="label">
-    Total tags
-  </div>
-</div>
-
-<div class="ui statistic">
-  <div class="value">
-    {{ tag_counts.items|length }}
-  </div>
-  <div class="label">
-    Different tags used
-  </div>
 </div>
 
 
