@@ -23,6 +23,7 @@ class Settings(models.Model):
 
 class History(models.Model):
     tag = models.CharField(max_length=50)
+    account_id = models.CharField(max_length=50)
     txn_ids = models.TextField()
     txns_affected = models.IntegerField()
     created = models.DateTimeField('date created', auto_now_add=True)

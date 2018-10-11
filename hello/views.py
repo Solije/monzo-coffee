@@ -308,6 +308,11 @@ def tag_test(request, account_id):
         )
         messages.info(request, 'Your most recent transaction was tagged with #test. If it is older than a week, may need to delete App Cache and Data before the update is visible in the Monzo app.')
 
-    messages.info(request, 'The most recent transaction is already tagged with #test')
     return redirect('account', account_id)
+
+@password_required
+def undo_action(request, pk, account_id):
+    """Undo an action performed previously"""
+    client = Monzo(os.environ.get('MONZO_ACCESS_TOKEN'))
+    txns = client.get_transactions(account_id)['transactions']
 
