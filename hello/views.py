@@ -306,7 +306,8 @@ def tag_test(request, account_id):
             txn_ids=txn['id'],
             txns_affected=1
         )
-        messages.info(request, 'Your latest transaction was tagged with #test. If it is older than a week, may need to delete App Cache and Data before the update is visible in the Monzo app.'.format(txns_updated))
+        messages.info(request, 'Your latest transaction was tagged with #test. If it is older than a week, may need to delete App Cache and Data before the update is visible in the Monzo app.')
 
+    messages.info(request, 'Latest transaction is already tagged with #test')
     return redirect('account', account_id)
 
